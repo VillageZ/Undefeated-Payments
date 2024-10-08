@@ -1,28 +1,22 @@
 import pandas as pd
+
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import RFE
 
 def load_data(file_path):
-    """Load the dataset from a CSV file."""
-    data = pd.read_csv(file_path, skiprows=1)  # Added skiprows parameter here
+    """Load the dataset from a XLSX file."""
+    data = pd.read_excel(file_path, skiprows=1)  # Added skiprows parameter here
     return data
 
 def preprocess_data(data):
     """Preprocess the data: drop non-numeric columns and handle missing values."""
-    # Rename columns for better readability
-    data.columns = ['ID', 'LIMIT_BAL', 'SEX', 'EDUCATION', 'MARRIAGE', 'AGE', 'PAY_0', 
-                    'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6', 'BILL_AMT1', 
-                    'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 
-                    'BILL_AMT6', 'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 
-                    'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6', 'default payment next month']
-    
-    # Drop non-numeric columns
+      
+    # Drop non-numeric columns, change remaining columns to numeric, add 0 to na columns
+    data = data.apply(pd.to_numeric, errors='coerce').fillna(0)
     numeric_data = data.drop(columns=['ID', 'SEX'])
-    
-    # Handle missing values if necessary
-    numeric_data = numeric_data.fillna(numeric_data.mean())  # Example: filling missing values with mean
-    
+   
+      
     return numeric_data
 
 def select_features(data, target_column, n_features):
@@ -46,9 +40,9 @@ def select_features(data, target_column, n_features):
     return selected_features
 
 def main():
-    # Specify the path to your CSV file
-    file_path = r'C:\Users\zclar\OneDrive\Documents\Python-Projects\Credit-Project\data\default-of-credit-card-clients.csv'
-    
+    # Specify the path to your xlsx file
+    file_path = r'C:\Users\zclar\OneDrive\Documents\Python-Projects\Credit-Project\data\default of credit card clients.xlsx'
+
     # Load the data
     data = load_data(file_path)
     
@@ -65,6 +59,7 @@ def main():
     selected_features = select_features(processed_data, target_column, n_features_to_select)
     
     # Print the selected features
+    print(processed_data.dtypes)
     print("Selected Features:")
     print(selected_features)
 

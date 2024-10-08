@@ -3,12 +3,8 @@ import pandas as pd
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 # Load the dataset
-data = pd.read_csv(r'C:\Users\zclar\OneDrive\Documents\Python-Projects\Credit-Project\data\default-of-credit-card-clients.csv', skiprows=1)
-
-# Rename columns for better readability
-data.columns = ['ID', 'LIMIT_BAL', 'SEX', 'EDUCATION', 'MARRIAGE', 'AGE', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 
-                'PAY_5', 'PAY_6', 'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6', 
-                'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6', 'default payment next month']
+data = pd.read_excel(r'C:\Users\zclar\OneDrive\Documents\Python-Projects\Credit-Project\data\default of credit card clients.xlsx',
+                    skiprows=1)
 
 # Drop non-numeric columns, like 'ID' and 'SEX', since they don't contribute to VIF calculation
 numeric_data = data.drop(columns=['ID', 'SEX', 'default payment next month'])

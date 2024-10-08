@@ -5,7 +5,8 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error, r2_score, accuracy_score
 
 # Load the dataset
-data = pd.read_csv(r'C:\Users\zclar\OneDrive\Documents\Python-Projects\Credit-Project\data\default-of-credit-card-clients.csv', skiprows=1)
+data = pd.read_excel(r'C:\Users\zclar\OneDrive\Documents\Python-Projects\Credit-Project\data\default of credit card clients.xlsx',
+                    skiprows=1)
 
 # Define features and target variable
 X = data[['LIMIT_BAL', 'AGE', 'PAY_0', 'BILL_AMT1', 'BILL_AMT2']]
